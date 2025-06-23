@@ -3,7 +3,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import platform
 
-from Project.bigdataProject.location.data import loc, loc_name
+from Project.bigdataProject.location.data import loc, loc_name, df
 
 # 시스템에 맞는 폰트 지정
 if platform.system() == 'Darwin':  # macOS
@@ -11,15 +11,6 @@ if platform.system() == 'Darwin':  # macOS
 
 url = "https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2013/json/skorea_provinces_geo.json"
 gdf = gpd.read_file(url)
-
-total = pd.DataFrame(loc)[loc_name].iloc[0]
-pop = pd.DataFrame(loc)[loc_name].iloc[1]
-
-lis = [[n, d, p] for n, d, p in zip(loc_name, total, pop)]
-df = pd.DataFrame(lis, columns=['행정구역별(시도)', '범죄발생총건수', '인구수'])
-
-df[['범죄발생총건수']] = df[['범죄발생총건수']].astype(int)
-df[['인구수']] = df[['인구수']].astype(int)
 
 fig, ax = plt.subplots(figsize=(12, 6))
 

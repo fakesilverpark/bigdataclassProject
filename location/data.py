@@ -12,4 +12,13 @@ loc_name = ['서울특별시', '부산광역시', '대구광역시', '인천광�
 
 loc.columns = original_cols + loc_name
 
+total = pd.DataFrame(loc)[loc_name].iloc[0]
+pop = pd.DataFrame(loc)[loc_name].iloc[1]
+
+lis = [[n, d, p] for n, d, p in zip(loc_name, total, pop)]
+df = pd.DataFrame(lis, columns=['행정구역별(시도)', '범죄발생총건수', '인구수'])
+
+df[['범죄발생총건수']] = df[['범죄발생총건수']].astype(int)
+df[['인구수']] = df[['인구수']].astype(int)
+
 print(loc.info())
